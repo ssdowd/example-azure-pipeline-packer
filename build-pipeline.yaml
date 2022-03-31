@@ -12,6 +12,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: env | sort
+  displayName: 'Dump environment'
 - task: AzureCLI@2
   displayName: Packer Build
   inputs:
