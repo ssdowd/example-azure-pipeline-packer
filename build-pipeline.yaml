@@ -23,16 +23,15 @@ steps:
   env:
     MY_CLIENT_ID: $(client-id)
     MY_CLIENT_SECRET: $(client-secret)
+    MY_TENANT_ID: $(tenant-id)
+    MY_SUBSCRIPTION_ID: $(subscription-id)
   inputs:
     azureSubscription: 'Azure service connection'
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      MY_TENANT_ID=$(az account show | jq -r .tenantId)
-      MY_SUBSCRIPTION_ID=$(az account show | jq -r .id)
-      # MY_CLIENT_ID=$(az keyvault secret show --vault-name examplekeys --name client-id | jq -r .value)
-      # MY_CLIENT_SECRET=$(az keyvault secret show --vault-name examplekeys --name client-secret | jq -r .value)
-      echo tenant: $MY_TENANT_ID, sub: ${MY_SUBSCRIPTION_ID} foo: $(foo)
+      MY_XXTENANT_ID=$(az account show | jq -r .tenantId)
+      MY_XXSUBSCRIPTION_ID=$(az account show | jq -r .id)
       packer build -var "client_id=${MY_CLIENT_ID}" -var "client_secret=${MY_CLIENT_SECRET}" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
 
 # stages:

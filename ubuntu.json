@@ -1,13 +1,12 @@
 {
-    "variables":     {
+    "variables": {
         "client_id": "",
         "client_secret": "",
         "tenant_id": "",
         "subscription_id": "",
         "resourceGroupName": "builderRG",
-        "version": "v0.0.1"
+        "version": "v0.0.2"
     },
-
     "builders": [
         {
             "type": "azure-arm",
@@ -23,7 +22,8 @@
             "image_sku": "16.04-LTS",
             "azure_tags": {
                 "dept": "DevOps",
-                "task": "{{ user `version` }}"
+                "vmname": "Nginx",
+                "version": "{{ user `version` }}"
             },
             "location": "Central US",
             "vm_size": "Standard_DS1"
