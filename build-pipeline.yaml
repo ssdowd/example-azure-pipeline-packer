@@ -1,4 +1,4 @@
-
+# pipeline to build image via packer
 trigger:
   branches:
     include:
