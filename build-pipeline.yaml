@@ -26,7 +26,7 @@ steps:
       MY_TENANT_ID=$(az account show | jq -r .tenantId)
       MY_SUBSCRIPTION_ID=$(az account show | jq -r .id)
       echo tenant: $MY_TENANT_ID, sub: ${MY_SUBSCRIPTION_ID}
-      # packer build -var 'client_id=foo' -var 'client_secret=bar' -var "tenant_id=${TENANT_ID}" -var "subscription_id=${SUBSCRIPTION_ID}" ubuntu.json
+      packer build -var 'client_id=foo' -var 'client_secret=bar' -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
 
 # stages:
 # - stage: Build
