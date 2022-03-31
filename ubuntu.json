@@ -16,7 +16,7 @@
             "tenant_id": "{{ user `tenant_id` }}",
             "subscription_id": "{{ user `subscription_id` }}",
             "managed_image_resource_group_name": "builderRG",
-            "managed_image_name": "testPackerUbuntuNginxImage",
+            "managed_image_name": "testPackerUbuntuNginxImage-{{ user `version` }}",
             "os_type": "Linux",
             "image_publisher": "Canonical",
             "image_offer": "UbuntuServer",
