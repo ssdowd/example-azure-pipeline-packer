@@ -18,6 +18,9 @@ steps:
   displayName: 'Dump environment'
 - task: AzureCLI@2
   displayName: Packer Build
+  env:
+    MY_CLIENT_ID: $(client-id)
+    MY_CLIENT_SECRET: $(client-secret)
   inputs:
     azureSubscription: 'Azure service connection'
     scriptType: bash
@@ -28,7 +31,7 @@ steps:
       # MY_CLIENT_ID=$(az keyvault secret show --vault-name examplekeys --name client-id | jq -r .value)
       # MY_CLIENT_SECRET=$(az keyvault secret show --vault-name examplekeys --name client-secret | jq -r .value)
       echo tenant: $MY_TENANT_ID, sub: ${MY_SUBSCRIPTION_ID}
-      packer build -var "client_id=$(client-id)" -var "client_secret=$(client-secret)" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
+      echo packer build -var "client_id=${CLIENT_ID}" -var "client_secret=${CLIENT_SECRET}" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
 
 # stages:
 # - stage: Build
