@@ -21,7 +21,9 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      packer build -var 'client_id=foo' -var 'client_secret=bar' -var 'tenant_id=baz' -var 'subscription_id=gipple' ubuntu.json
+      TENANT_ID=az account show | jq -r .tenantId
+      SUBSCRIPTION_ID=az account show | jq -t .Id
+      packer build -var 'client_id=foo' -var 'client_secret=bar' -var "tenant_id=${TENANT_ID}" -var "subscription_id=${SUBSCRIPTION_ID}" ubuntu.json
 
 # stages:
 # - stage: Build
