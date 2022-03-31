@@ -23,7 +23,7 @@ steps:
     inlineScript: |
       echo Hello
       az account show | jq -r .tenantId
-      # TENANT_ID=$(az account show | jq -r .tenantId)
+      MY_TENANT_ID=$(az account show | jq -r .tenantId)
       # SUBSCRIPTION_ID=$(az account show | jq -r .Id)
       # packer build -var 'client_id=foo' -var 'client_secret=bar' -var "tenant_id=${TENANT_ID}" -var "subscription_id=${SUBSCRIPTION_ID}" ubuntu.json
 
