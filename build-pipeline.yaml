@@ -7,6 +7,8 @@ trigger:
     - fix/*
 #- main
 
+variables:
+  group: builder-vars
 
 pool:
   vmImage: ubuntu-latest
@@ -21,14 +23,12 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      echo Hello
-      az account show | jq -r .tenantId
       MY_TENANT_ID=$(az account show | jq -r .tenantId)
       MY_SUBSCRIPTION_ID=$(az account show | jq -r .id)
       MY_CLIENT_ID=$(az keyvault secret show --vault-name examplekeys --name client-id | jq -r .value)
       MY_CLIENT_SECRET=$(az keyvault secret show --vault-name examplekeys --name client-secret | jq -r .value)
       echo tenant: $MY_TENANT_ID, sub: ${MY_SUBSCRIPTION_ID}
-      packer build -var "client_id=${MY_CLIENT_ID}" -var "client_secret=${MY_CLIENT_SECRET}" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
+      packer build -var "client_id=$(client-id)" -var "client_secret=$(client-secret)" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
 
 # stages:
 # - stage: Build
