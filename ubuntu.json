@@ -11,7 +11,7 @@
     "builders": [
         {
             "type": "azure-arm",
-            "client_id": "{{ user `client-_id` }}",
+            "client_id": "{{ user `client_id` }}",
             "client_secret": "{{ user `client_secret` }}",
             "tenant_id": "{{ user `tenant_id` }}",
             "subscription_id": "{{ user `subscription_id` }}",
