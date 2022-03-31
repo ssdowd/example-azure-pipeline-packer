@@ -12,8 +12,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 - task: AzureCLI@2
   displayName: Packer Build
   inputs:
@@ -21,7 +19,7 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      packer build ubuntu.json
+      packer build ubuntu.json -var 'client_id=foo' -var 'client_secret=bar' -var 'tenant_id=baz' -var 'subscription_id=gipple'
 
 # stages:
 # - stage: Build
