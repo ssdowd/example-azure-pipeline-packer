@@ -18,8 +18,8 @@
             "managed_image_name": "testRHELNginxImage-{{ user `version` }}",
             "os_type": "Linux",
             "image_publisher": "RedHat",
-            "image_offer": "RedHat",
-            "image_sku": "7.2",
+            "image_offer": "RHEL",
+            "image_sku": "79-gen2",
             "azure_tags": {
                 "dept": "DevOps",
                 "vmname": "Nginx",
