@@ -35,11 +35,17 @@
             "inline": [
                 "apt-get update",
                 "apt-get upgrade -y",
-                "apt-get -y install nginx",
+                "apt-get -y install ansible",
+                "mkdir -p /oreilly/installation/ansible",
                 "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
             ],
             "inline_shebang": "/bin/sh -x",
             "type": "shell"
+        },
+        {
+            "type": "file",
+            "source": "file/ansible/nginx_install.yml",
+            "destination": "/oreilly/installation/ansible"
         }
     ]
 }
