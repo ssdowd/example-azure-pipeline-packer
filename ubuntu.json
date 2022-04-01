@@ -33,19 +33,26 @@
         {
             "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
             "inline": [
+                "mkdir -p /oreilly/installation/ansible"
+            ],
+            "inline_shebang": "/bin/sh -x",
+            "type": "shell"
+        }
+        {
+            "type": "file",
+            "source": "files/ansible/nginx_install.yml",
+            "destination": "/oreilly/installation/ansible"
+        },
+        {
+            "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+            "inline": [
                 "apt-get update",
                 "apt-get upgrade -y",
                 "apt-get -y install ansible",
-                "mkdir -p /oreilly/installation/ansible",
                 "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
             ],
             "inline_shebang": "/bin/sh -x",
             "type": "shell"
-        },
-        {
-            "type": "file",
-            "source": "file/ansible/nginx_install.yml",
-            "destination": "/oreilly/installation/ansible"
         }
     ]
 }
