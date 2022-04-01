@@ -32,7 +32,8 @@ steps:
     inlineScript: |
       MY_XXTENANT_ID=$(az account show | jq -r .tenantId)
       MY_XXSUBSCRIPTION_ID=$(az account show | jq -r .id)
-      packer build -var "client_id=${MY_CLIENT_ID}" -var "client_secret=${MY_CLIENT_SECRET}" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
+      MY_HASH=$(git rev-parse --short HEAD)
+      packer build -var "version=${MY_HASH}" -var "client_id=${MY_CLIENT_ID}" -var "client_secret=${MY_CLIENT_SECRET}" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
 
 # stages:
 # - stage: Build
