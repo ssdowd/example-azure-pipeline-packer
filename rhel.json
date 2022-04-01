@@ -58,7 +58,7 @@
                 "yum upgrade -y",
                 "yum -y install ansible",
                 "chmod o-w,g-w /oreilly/installation/ansible",
-                "mv /tmp/tum.repos.d/* /etc/yum.repos.d/",
+                "mv /tmp/yum.repos.d/* /etc/yum.repos.d/",
                 "ansible-playbook -i /oreilly/installation/ansible/hosts /oreilly/installation/ansible/nginx_install.yml",
                 "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
             ],
