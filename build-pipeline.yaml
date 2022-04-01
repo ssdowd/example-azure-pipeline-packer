@@ -29,4 +29,4 @@ steps:
     scriptLocation: inlineScript
     inlineScript: |
       MY_HASH=$(git rev-parse --short HEAD)
-      packer build -var "version=${MY_HASH}" -var "client_id=${MY_CLIENT_ID}" -var "client_secret=${MY_CLIENT_SECRET}" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
+      packer build -var "version=${MY_HASH}" -var "client_id=${MY_CLIENT_ID}" -var "client_secret=${MY_CLIENT_SECRET}" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" rhel.json
