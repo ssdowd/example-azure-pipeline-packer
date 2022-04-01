@@ -41,7 +41,7 @@
         {
             "type": "file",
             "source": "files/ansible/nginx_install.yml",
-            "destination": "/oreilly/installation/ansible"
+            "destination": "/oreilly/installation/ansible/nginx_install.yml"
         },
         {
             "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
