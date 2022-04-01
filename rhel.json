@@ -34,7 +34,9 @@
             "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
             "inline": [
                 "mkdir -p /oreilly/installation/ansible",
-                "chmod a+w /oreilly/installation/ansible"
+                "chmod a+w /oreilly/installation/ansible",
+                "mkdir /tmp/yum.repos.d",
+                "chmod 777 /tmp/yum.repos.d"
             ],
             "inline_shebang": "/bin/sh -x",
             "type": "shell"
@@ -47,7 +49,7 @@
         {
             "type": "file",
             "source": "files/rhel/yum.repos.d/",
-            "destination": "/etc/yum.repos.d/"
+            "destination": "/tmp/yum.repos.d"
         },
         {
             "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
@@ -56,6 +58,7 @@
                 "yum upgrade -y",
                 "yum -y install ansible",
                 "chmod o-w,g-w /oreilly/installation/ansible",
+                "mv /tmp/tum.repos.d/* /etc/yum.repos.d/",
                 "ansible-playbook -i /oreilly/installation/ansible/hosts /oreilly/installation/ansible/nginx_install.yml",
                 "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
             ],
