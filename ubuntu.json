@@ -5,7 +5,7 @@
         "tenant_id": "",
         "subscription_id": "",
         "resourceGroupName": "builderRG",
-        "version": "v0.0.3"
+        "version": "v0.0.4"
     },
     "builders": [
         {
@@ -34,7 +34,8 @@
             "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
             "inline": [
                 "mkdir -p /oreilly/installation/ansible",
-                "chmod 777 /oreilly/installation/ansible"
+                "chgrp azureuser /oreilly/installation/ansible",
+                "chmod g+w /oreilly/installation/ansible"
             ],
             "inline_shebang": "/bin/sh -x",
             "type": "shell"
@@ -50,6 +51,7 @@
                 "apt-get update",
                 "apt-get upgrade -y",
                 "apt-get -y install ansible",
+                "ansible-playbook -i /oreilly/installation/ansible/hosts /oreilly/installation/ansible/nginx_install.yml",
                 "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
             ],
             "inline_shebang": "/bin/sh -x",
