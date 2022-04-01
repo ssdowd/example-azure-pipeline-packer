@@ -5,12 +5,10 @@ trigger:
     - feature/*
     - features/*
     - fix/*
-#- main
+    - main
 
 variables:
 - group: 'builder-vars'
-- name: 'foo'
-  value: 'bar'
 
 pool:
   vmImage: ubuntu-latest
@@ -30,23 +28,5 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      MY_XXTENANT_ID=$(az account show | jq -r .tenantId)
-      MY_XXSUBSCRIPTION_ID=$(az account show | jq -r .id)
       MY_HASH=$(git rev-parse --short HEAD)
       packer build -var "version=${MY_HASH}" -var "client_id=${MY_CLIENT_ID}" -var "client_secret=${MY_CLIENT_SECRET}" -var "tenant_id=${MY_TENANT_ID}" -var "subscription_id=${MY_SUBSCRIPTION_ID}" ubuntu.json
-
-# stages:
-# - stage: Build
-#   jobs:
-#   - job: Packer_Build
-#     pool: 
-#       name: Default
-#     steps:
-#     - task: AzureCLI@2
-#       displayName: Packer Build
-#       inputs:
-#         azureSubscription: 'Azure service connection'
-#         scriptType: bash
-#         scriptLocation: inlineScript
-#         inlineScript: |
-#           packer build ubuntu.json
