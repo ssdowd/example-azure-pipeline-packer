@@ -3,6 +3,11 @@
   tasks:
     - name: ensure nginx is at the latest version
       yum: name=nginx state=latest
+    - name: open firewalld ports
+      ansible.posix.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
     - name: start nginx
       service:
           name: nginx
